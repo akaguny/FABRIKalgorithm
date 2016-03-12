@@ -5,7 +5,7 @@
 function FABRIK(){
 }
 
-FABRIK.algorithm = function(arrayOfInitialPositions, TargetPoint, tol) {
+FABRIK.algorithm = function(initialPositions, TargetPoint, tolerance) {
     // Инициализация переменных
     // узел pn = [[x,y,z]]
     var // newArrayOfInitialPositions = [new Float32Array(arrayOfInitialPositions.length)[new Float32Array(TargetPoint.length)]],
@@ -15,7 +15,10 @@ FABRIK.algorithm = function(arrayOfInitialPositions, TargetPoint, tol) {
         TargetPoint = TargetPoint, // цель, целевая точка t = [x,y,z]
         distBeetweenStartPointAndTarget, // дистанция между стартовым узлом и целью, целевой точкой
         lambdaDistance = [], // отношение
-        tol = tol, // максимально допустимое растояние между конечным узлом и целью
+        tol = tolerance, // максимально допустимое растояние между конечным узлом и целью
+        arrayOfInitialPositions = initialPositions,
+        // если цель достижима, то сохраним позицию нулевого узла
+        nullPoint = [0,0,0],
         sumOfInitialDistances = 0; // переменная для общей дистанции между узлами
     // Функция, вычисляющая расстояние между 2 точками
     // Расстояние между 2 точками выч. по формуле
@@ -92,9 +95,7 @@ FABRIK.algorithm = function(arrayOfInitialPositions, TargetPoint, tol) {
     else {
         var count = 1;
         window.alert("Цель достижима!");
-        // если цель достижима, то сохраним позицию нулевого узла
-        //var nullPoint = arrayOfInitialPositions[0];
-        var nullPoint = [0,0,0];
+
         var DIFa = distBetweenPoints(arrayOfInitialPositions[arrayOfInitialPositions.length - 1], TargetPoint);
         console.log("DIFa = " + DIFa);
         do {
@@ -127,7 +128,9 @@ FABRIK.algorithm = function(arrayOfInitialPositions, TargetPoint, tol) {
             // Этап 2: обратное следование
             // Восстанавливаем корневому элементу его позицию
             arrayOfInitialPositions[0] = nullPoint;
-            //console.dir(arrayOfInitialPositions);
+            console.log(arrayOfInitialPositions[0]);
+            console.dir(nullPoint);
+            console.log(arrayOfInitialPositions[0]);
             for (var i = 0, len = arrayOfInitialPositions.length - 1; i < (len - 1); i++) {
                 // Найдем дистанцию r[i] между целью t и узлом p[i]
                 distBeetweenJointsAndTarget[i] = distBetweenPoints(arrayOfInitialPositions[i + 1], arrayOfInitialPositions[i]);
