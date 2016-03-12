@@ -93,7 +93,8 @@ FABRIK.algorithm = function(arrayOfInitialPositions, TargetPoint, tol) {
         var count = 1;
         window.alert("Цель достижима!");
         // если цель достижима, то сохраним позицию нулевого узла
-        var nullPoint = arrayOfInitialPositions[0];
+        //var nullPoint = arrayOfInitialPositions[0];
+        var nullPoint = [0,0,0];
         var DIFa = distBetweenPoints(arrayOfInitialPositions[arrayOfInitialPositions.length - 1], TargetPoint);
         console.log("DIFa = " + DIFa);
         do {
