@@ -18,7 +18,7 @@ FABRIK.algorithm = function(initialPositions, TargetPoint, tolerance) {
         tol = tolerance, // максимально допустимое растояние между конечным узлом и целью
         arrayOfInitialPositions = initialPositions,
         // если цель достижима, то сохраним позицию нулевого узла
-        nullPoint = [0,0,0],
+        nullPoint = initialPositions[0].slice(), // slice без параметров копирует массив
         sumOfInitialDistances = 0; // переменная для общей дистанции между узлами
     // Функция, вычисляющая расстояние между 2 точками
     // Расстояние между 2 точками выч. по формуле
